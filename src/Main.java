@@ -1,44 +1,37 @@
 public class Main {
-    public static void main(String[] args) {
-        String playerName = "Steve";
-        int playerHealth = 9;
-        int hungerLevel = 6;
-        boolean isOnFire = true;
 
-        System.out.println("===" + playerName + "'s STATUS ===");
-
-        if (playerHealth <= 0) {
-            System.out.println(playerName + " has died!... Respawn??");
-        } else if (playerHealth <= 5) {
-            System.out.println("Hey Careful! you are at Critical Health!");
-        } else if (playerHealth <= 10) {
-            System.out.println("Health is getting Low! gather some food immediately!");
-        } else {
-            System.out.println("Your Good!!");
+    static void printWorld(int[][] world) {
+        System.out.println("=== WORLD CROSS-SECTION ===");
+        for (int row = 0; row < world.length; row++) {
+            for (int col = 0; col < world[row].length; col++) {
+                int block = world[row][col];
+                if (block == 0) System.out.print("  "); // air
+                else if (block == 1) System.out.print("🟫"); // dirt
+                else if (block == 2) System.out.print("⬜"); // stone
+                else if (block == 3) System.out.print("🟩"); // grass
+                else if (block == 4) System.out.print("🟡"); // sand
+                else if (block == 5) System.out.print("🔵"); // water
+                else if (block == 6) System.out.print("I"); // Trees
+            }
+            System.out.println();
         }
-
-        if (hungerLevel <= 0) {
-            System.out.println("Hey you are starving! Quick! Eat!");
-        } else if (hungerLevel <= 3) {
-            System.out.println("Very hungry! Eat something!");
-        } else {
-            System.out.println("Hunger is fine! Good to go!");
-        }
-
-        if (isOnFire == true) {
-            System.out.println("Hey you're on Fire!! Quick! go to a water source!");
-
-        }
-
-        if(playerHealth>6 && hungerLevel > 3){
-            System.out.println("You can sprint!!!");
-
-        }
-        else {
-            System.out.println("You are too weak to sprint. Please Increase your hungerLevel");
-        }
-
-
+        System.out.println("Air=  Dirt=🟫 Stone=⬜ Trees= I Grass=🟩 Sand=🟡 Water=🔵");
     }
 
+    public static void main(String[] args) {
+
+        // 0=air, 1=dirt, 2=stone, 3=grass, 4=sand, 5=water
+        int[][] world = {
+                {0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0},
+                {0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0},
+                {0, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0},
+                {3, 3, 3, 3, 4, 4, 5, 5, 5, 4, 3, 3, 3, 3, 3, 3},
+                {1, 1, 1, 1, 4, 5, 5, 5, 5, 4, 1, 1, 1, 1, 1, 1},
+                {2, 2, 2, 0, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2},
+                {2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2},
+                {2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2},
+        };
+
+        printWorld(world);
+    }
 }
