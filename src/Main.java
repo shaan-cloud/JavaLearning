@@ -1,37 +1,41 @@
 public class Main {
-
-    static void printWorld(int[][] world) {
-        System.out.println("=== WORLD CROSS-SECTION ===");
-        for (int row = 0; row < world.length; row++) {
-            for (int col = 0; col < world[row].length; col++) {
-                int block = world[row][col];
-                if (block == 0) System.out.print("  "); // air
-                else if (block == 1) System.out.print("🟫"); // dirt
-                else if (block == 2) System.out.print("⬜"); // stone
-                else if (block == 3) System.out.print("🟩"); // grass
-                else if (block == 4) System.out.print("🟡"); // sand
-                else if (block == 5) System.out.print("🔵"); // water
-                else if (block == 6) System.out.print("I"); // Trees
-            }
-            System.out.println();
-        }
-        System.out.println("Air=  Dirt=🟫 Stone=⬜ Trees= I Grass=🟩 Sand=🟡 Water=🔵");
-    }
-
     public static void main(String[] args) {
 
-        // 0=air, 1=dirt, 2=stone, 3=grass, 4=sand, 5=water
-        int[][] world = {
-                {0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0},
-                {0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0},
-                {0, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0},
-                {3, 3, 3, 3, 4, 4, 5, 5, 5, 4, 3, 3, 3, 3, 3, 3},
-                {1, 1, 1, 1, 4, 5, 5, 5, 5, 4, 1, 1, 1, 1, 1, 1},
-                {2, 2, 2, 0, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2},
-                {2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2},
-                {2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2},
-        };
+        DirtBlock dirt = new DirtBlock();
+        StoneBlock stone = new StoneBlock();
 
-        printWorld(world);
+        // describe() works on both - inherited!
+        dirt.describe();
+        stone.describe();
+
+        System.out.println("---");
+
+        // Breaking blocks with different tools
+        System.out.println("Breaking dirt with Shovel: " +
+                dirt.getBreakTime("Shovel") + "s");
+        System.out.println("Breaking dirt with Hand: " +
+                dirt.getBreakTime("Hand") + "s");
+        System.out.println("Breaking stone with Pickaxe: " +
+                stone.getBreakTime("Pickaxe") + "s");
+        System.out.println("Breaking stone with Hand: " +
+                stone.getBreakTime("Hand") + "s");
+
+        System.out.println("---");
+
+        // Placing blocks
+        System.out.println("Can place dirt on grass? " +
+                dirt.canPlaceOn("Grass"));
+
+        System.out.println("---");
+
+        // Breaking!
+        dirt.onBreak();
+        stone.onBreak();
+
+        System.out.println("---");
+
+        // Texture IDs
+        System.out.println("Dirt texture ID: " + dirt.getTextureID());
+        System.out.println("Stone texture ID: " + stone.getTextureID());
     }
 }
